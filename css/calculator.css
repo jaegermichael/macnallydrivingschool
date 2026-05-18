@@ -1,0 +1,97 @@
+/* ===== CALCULATOR ===== */
+.calculator-section {
+    background: linear-gradient(135deg, var(--mds-blue-dark), var(--mds-blue-mid));
+    padding: 80px 5%;
+    color: white;
+}
+
+.calculator-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.calculator-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 40px;
+}
+
+.calc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.calc-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.calc-group select,
+.calc-group input {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.calc-group select option {
+    background: var(--mds-blue-dark);
+    color: white;
+}
+
+.calc-group input:focus,
+.calc-group select:focus {
+    outline: none;
+    border-color: var(--mds-gold);
+}
+
+.calc-total {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+.calc-total-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.calc-total-amount {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--mds-gold);
+}
+
+.calc-total-amount span {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.calc-note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}

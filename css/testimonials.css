@@ -1,0 +1,144 @@
+/* ===== TESTIMONIALS ===== */
+.testimonials-section {
+    background: linear-gradient(180deg, var(--mds-blue-dark) 0%, var(--mds-blue-mid) 100%);
+    overflow: hidden;
+    padding: 80px 0;
+}
+
+.testimonials-section .section-title,
+.testimonials-section .section-tag {
+    color: white;
+    border-color: var(--mds-red);
+}
+
+.testimonials-section .section-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.testimonials-track {
+    display: flex;
+    gap: 30px;
+    animation: scrollTestimonials 30s linear infinite;
+    width: max-content;
+    padding: 20px 0;
+}
+
+@keyframes scrollTestimonials {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.testimonial-card {
+    min-width: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-style: italic;
+    color: #444;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mds-blue-light), var(--mds-red));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+}
+
+.author-info h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--mds-blue-dark);
+}
+
+.author-info span {
+    font-size: 0.8rem;
+    color: var(--mds-red);
+    font-weight: 600;
+}
+
+.video-testimonial {
+    min-width: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../public/images/WhatsApp%20Image%202026-05-12%20at%2014.00.44.jpeg') center/cover;
+    opacity: 0.35;
+}
+
+.play-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--mds-red);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s;
+    border: 3px solid white;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+    background: var(--mds-blue-light);
+}
+
+.video-info {
+    padding: 25px;
+    color: white;
+}
+
+.video-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.video-info p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
