@@ -102,7 +102,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: url('../public/images/WhatsApp%20Image%202026-05-12%20at%2014.00.44.jpeg') center/cover;
+    background: url('/images/WhatsApp%20Image%202026-05-12%20at%2014.00.44.jpeg') center/cover;
     opacity: 0.35;
 }
 
