@@ -384,7 +384,9 @@ function App() {
   return (
     <>
       <div className={`loading-screen${isLoading ? '' : ' hidden'}`} id="loadingScreen">
-        <img className="loading-logo" src="/images/macnally-logo.png" alt="Macnally Driving School" />
+        <div className="loading-logo" aria-label="Macnally Driving School">
+          <img src="/images/macnally-logo.png" alt="" />
+        </div>
         <div className="loading-bar">
           <div className="loading-bar-fill"></div>
         </div>
