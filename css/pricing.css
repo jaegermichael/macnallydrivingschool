@@ -19,13 +19,34 @@ body.dark-mode .pricing-section {
 .pricing-card {
     background: white;
     border: 1px solid rgba(2, 65, 134, 0.15);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 0;
     text-align: center;
     position: relative;
     overflow: hidden;
     transition: all 0.4s ease;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+    .pricing-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .pricing-card .btn {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .pricing-features {
+        padding: 0 20px;
+    }
 }
 
 body.dark-mode .pricing-card {

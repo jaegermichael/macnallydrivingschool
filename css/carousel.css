@@ -35,11 +35,36 @@ body.dark-mode .fleet-section {
     margin-left: -140px;
     margin-top: -180px;
     background: white;
-    border-radius: 20px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
     transition: all 0.5s;
     cursor: grab;
+}
+
+@media (max-width: 768px) {
+    .fleet-section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .carousel-container {
+        height: 360px;
+        perspective: 900px;
+    }
+
+    .carousel-item {
+        height: 320px;
+    }
+
+    .carousel-nav {
+        margin-top: 36px;
+    }
+
+    .carousel-btn {
+        width: 46px;
+        height: 46px;
+    }
 }
 
 body.dark-mode .carousel-item {

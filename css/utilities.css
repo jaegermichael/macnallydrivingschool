@@ -51,7 +51,7 @@
     padding: 8px 25px;
     background: rgba(231, 32, 35, 0.1);
     border: 2px solid var(--mds-red);
-    border-radius: 50px;
+    border-radius: 8px;
     font-size: 0.8rem;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -112,12 +112,31 @@ body.dark-mode .section-subtitle {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
+    .mobile-menu {
+        display: flex;
     }
 
-    .mobile-menu {
-        display: block;
+    .section-header {
+        margin-bottom: 44px;
+        padding: 0 20px;
+    }
+
+    .section-tag {
+        font-size: 0.7rem;
+        letter-spacing: 1.5px;
+        padding: 7px 14px;
+    }
+
+    .section-subtitle {
+        font-size: 0.98rem;
+        line-height: 1.65;
+    }
+
+    .btn {
+        justify-content: center;
+        padding: 14px 20px;
+        width: 100%;
+        max-width: 360px;
     }
 
     .hero-stats {
@@ -134,7 +153,7 @@ body.dark-mode .section-subtitle {
     }
 
     .testimonial-card {
-        min-width: 300px;
+        min-width: min(300px, calc(100vw - 40px));
     }
 
     .contact-bar-grid {
@@ -146,11 +165,28 @@ body.dark-mode .section-subtitle {
     }
 
     .carousel-item {
-        width: 280px;
-        margin-left: -140px;
+        width: 270px;
+        margin-left: -135px;
     }
 
     .calculator-container {
         padding: 30px 20px;
+    }
+
+    .fleet-section,
+    .pricing-section,
+    .services-section,
+    .testimonials-section,
+    .calculator-section,
+    .contact-section {
+        padding-top: 64px;
+        padding-bottom: 64px;
+    }
+}
+
+@media (max-width: 340px) {
+    .carousel-item {
+        width: 240px;
+        margin-left: -120px;
     }
 }

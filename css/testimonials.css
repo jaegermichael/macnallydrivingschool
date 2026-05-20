@@ -35,7 +35,7 @@
 .testimonial-card {
     min-width: 400px;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 40px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -81,10 +81,29 @@
 .video-testimonial {
     min-width: 500px;
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    border-radius: 8px;
     overflow: hidden;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .testimonials-track {
+        gap: 18px;
+        animation-duration: 38s;
+    }
+
+    .testimonial-card {
+        padding: 28px 22px;
+    }
+
+    .video-testimonial {
+        min-width: min(340px, calc(100vw - 40px));
+    }
+
+    .video-placeholder {
+        height: 210px;
+    }
 }
 
 .video-placeholder {

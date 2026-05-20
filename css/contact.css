@@ -79,6 +79,7 @@ body.dark-mode .contact-section {
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: start;
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
@@ -103,7 +104,7 @@ body.dark-mode .contact-info h3 {
     margin-bottom: 25px;
     padding: 20px;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     border: 1px solid rgba(2, 65, 134, 0.1);
     transition: all 0.3s ease;
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
@@ -162,7 +163,7 @@ body.dark-mode .contact-item p {
 .map-container {
     width: 100%;
     height: 250px;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     margin-top: 20px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -171,7 +172,7 @@ body.dark-mode .contact-item p {
 .contact-photo {
     margin-bottom: 30px;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 8px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -191,9 +192,55 @@ body.dark-mode .contact-item p {
 .contact-form {
     background: white;
     padding: 50px;
-    border-radius: 12px;
+    border-radius: 8px;
     border: 1px solid rgba(2, 65, 134, 0.1);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+    .contact-bar {
+        padding: 32px 20px;
+    }
+
+    .contact-bar-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .contact-bar-item {
+        align-items: flex-start;
+    }
+
+    .contact-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .contact-grid {
+        gap: 36px;
+    }
+
+    .contact-info h3 {
+        font-size: 1.55rem;
+    }
+
+    .contact-item {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .contact-item:hover {
+        transform: none;
+    }
+
+    .contact-form {
+        padding: 24px 18px;
+    }
+
+    .date-picker {
+        grid-template-columns: 1fr;
+    }
 }
 
 body.dark-mode .contact-form {

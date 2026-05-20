@@ -178,8 +178,12 @@ const classOptions = {
 function App() {
   const [isDark, setIsDark] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window === 'undefined' ? 1024 : window.innerWidth
+  );
   const [calculator, setCalculator] = useState({
     classValue: '4',
     lessons: 10,
@@ -313,6 +317,16 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', isMenuOpen);
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleCalcChange = (field) => (event) => {
     const value =
       field === 'classValue'
@@ -329,6 +343,24 @@ function App() {
     setCurrentSlide(nextIndex);
   };
 
+  const closeMenu = () => setIsMenuOpen(false);
+
+  const handleBookingSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const bookingDetails = [
+      `Name: ${formData.get('fullName')}`,
+      `Phone: ${formData.get('phone')}`,
+      `Class: ${formData.get('licenseClass')}`,
+      `Date: ${formData.get('lessonDate')}`,
+      `Time: ${formData.get('lessonTime')}`,
+      formData.get('message') ? `Message: ${formData.get('message')}` : null,
+    ].filter(Boolean);
+
+    const message = `Hi, I want to book a driving lesson.\n\n${bookingDetails.join('\n')}`;
+    window.open(`https://wa.me/263772329050?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  };
+
   const selectedClass = classOptions[calculator.classValue].label;
   const calcWhatsAppLink = `https://wa.me/263772329050?text=${encodeURIComponent(`Hi, I calculated my cost for ${selectedClass} (${calculator.lessons} lessons, total $${totalAmount}). Can I book?`)}`;
   const heroWhatsAppLink = `https://wa.me/263772329050?text=${encodeURIComponent('Hi, I am interested in the Macnally Driving School courses.')}`;
@@ -339,8 +371,11 @@ function App() {
     const half = carouselItems.length / 2;
     if (offset > half) offset -= carouselItems.length;
     if (offset < -half) offset += carouselItems.length;
+    const isCompact = viewportWidth <= 768;
+    const spacing = isCompact ? 82 : 120;
+    const depth = isCompact ? 240 : 400;
     return {
-      transform: `translateX(${offset * 120}px) translateZ(400px) rotateY(${offset * angle}deg) scale(${offset === 0 ? 1 : 0.8})`,
+      transform: `translateX(${offset * spacing}px) translateZ(${depth}px) rotateY(${offset * angle}deg) scale(${offset === 0 ? 1 : 0.8})`,
       opacity: offset === 0 ? 1 : 0.5,
       zIndex: offset === 0 ? 10 : 5 - Math.abs(offset),
     };
@@ -349,8 +384,7 @@ function App() {
   return (
     <>
       <div className={`loading-screen${isLoading ? '' : ' hidden'}`} id="loadingScreen">
-        <div className="loading-logo">MDS</div>
-        <div className="loading-text">Macnally Driving School</div>
+        <img className="loading-logo" src="/images/macnally-logo.png" alt="Macnally Driving School" />
         <div className="loading-bar">
           <div className="loading-bar-fill"></div>
         </div>
@@ -368,37 +402,44 @@ function App() {
       <nav className="navbar">
         <div className="logo">
           <a className="site-logo" href="#home">
-            MDS
+            <img src="/images/macnally-logo.png" alt="Macnally Driving School" />
           </a>
         </div>
-        <ul className="nav-links">
+        <ul className={`nav-links${isMenuOpen ? ' active' : ''}`} id="mainNavigation">
           <li>
-            <a href="#home">Home</a>
+            <a href="#home" onClick={closeMenu}>Home</a>
           </li>
           <li>
-            <a href="#fleet">Fleet</a>
+            <a href="#fleet" onClick={closeMenu}>Fleet</a>
           </li>
           <li>
-            <a href="#pricing">Pricing</a>
+            <a href="#pricing" onClick={closeMenu}>Pricing</a>
           </li>
           <li>
-            <a href="#calculator">Calculator</a>
+            <a href="#calculator" onClick={closeMenu}>Calculator</a>
           </li>
           <li>
-            <a href="#services">Services</a>
+            <a href="#services" onClick={closeMenu}>Services</a>
           </li>
           <li>
-            <a href="#contact">Contact</a>
+            <a href="#contact" onClick={closeMenu}>Contact</a>
           </li>
           <li>
-            <a href="https://wa.me/263772329050" className="nav-whatsapp" target="_blank" rel="noreferrer">
+            <a href="https://wa.me/263772329050" className="nav-whatsapp" target="_blank" rel="noreferrer" onClick={closeMenu}>
               <i className="fab fa-whatsapp"></i> Book Now
             </a>
           </li>
         </ul>
-        <div className="mobile-menu">
-          <i className="fas fa-bars"></i>
-        </div>
+        <button
+          className="mobile-menu"
+          type="button"
+          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isMenuOpen}
+          aria-controls="mainNavigation"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+        >
+          <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+        </button>
       </nav>
 
       <section className="hero" id="home">
@@ -753,41 +794,41 @@ function App() {
           </div>
 
           <div className="contact-form reveal">
-            <form id="bookingForm">
+            <form id="bookingForm" onSubmit={handleBookingSubmit}>
               <div className="form-group">
                 <label>Full Name</label>
-                <input type="text" placeholder="Enter your full name" required />
+                <input name="fullName" type="text" placeholder="Enter your full name" required />
               </div>
               <div className="form-group">
                 <label>Phone Number</label>
-                <input type="tel" placeholder="+263 77X XXX XXX" required />
+                <input name="phone" type="tel" placeholder="+263 77X XXX XXX" required />
               </div>
               <div className="form-group">
                 <label>License Class</label>
-                <select required>
+                <select name="licenseClass" required>
                   <option value="">Select License Class</option>
-                  <option value="oral">Oral Provisional</option>
-                  <option value="class4">Class 4 - Normal Vehicles</option>
-                  <option value="class2">Class 2 - Truck</option>
-                  <option value="class1">Class 1 - Buses</option>
-                  <option value="refresher">Refresher Course</option>
+                  <option value="Oral Provisional">Oral Provisional</option>
+                  <option value="Class 4 - Normal Vehicles">Class 4 - Normal Vehicles</option>
+                  <option value="Class 2 - Truck">Class 2 - Truck</option>
+                  <option value="Class 1 - Buses">Class 1 - Buses</option>
+                  <option value="Refresher Course">Refresher Course</option>
                 </select>
               </div>
               <div className="form-group">
                 <label>Preferred Date</label>
                 <div className="date-picker">
-                  <input type="date" id="lessonDate" required />
-                  <select required>
+                  <input type="date" id="lessonDate" name="lessonDate" required />
+                  <select name="lessonTime" required>
                     <option value="">Select Time</option>
-                    <option value="morning">Morning (8AM - 12PM)</option>
-                    <option value="afternoon">Afternoon (12PM - 5PM)</option>
-                    <option value="evening">Evening (5PM - 7PM)</option>
+                    <option value="Morning (8AM - 12PM)">Morning (8AM - 12PM)</option>
+                    <option value="Afternoon (12PM - 5PM)">Afternoon (12PM - 5PM)</option>
+                    <option value="Evening (5PM - 7PM)">Evening (5PM - 7PM)</option>
                   </select>
                 </div>
               </div>
               <div className="form-group">
                 <label>Message</label>
-                <textarea placeholder="Tell us about your driving experience or any questions..."></textarea>
+                <textarea name="message" placeholder="Tell us about your driving experience or any questions..."></textarea>
               </div>
               <button type="submit" className="btn btn-primary" style={{ width: '100%', border: 'none' }}>
                 <i className="fas fa-paper-plane"></i> Submit Booking Request
