@@ -1,4 +1,4 @@
-/* ===== 3D CAROUSEL ===== */
+/* ===== FLEET CAROUSEL ===== */
 .fleet-section {
     background: linear-gradient(180deg, #f8fafc 0%, #e8f0f8 100%);
     padding: 100px 0;
@@ -10,9 +10,8 @@ body.dark-mode .fleet-section {
 }
 
 .carousel-container {
-    perspective: 1200px;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1120px;
     margin: 0 auto;
     height: 430px;
     position: relative;
@@ -22,23 +21,22 @@ body.dark-mode .fleet-section {
     position: relative;
     width: 100%;
     height: 100%;
-    transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .carousel-item {
     position: absolute;
-    width: 280px;
-    height: 360px;
+    width: 380px;
+    height: 380px;
     left: 50%;
     top: 50%;
-    margin-left: -140px;
-    margin-top: -180px;
+    margin-left: -190px;
+    margin-top: -190px;
     background: white;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
-    transition: all 0.5s;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
     cursor: grab;
 }
 
@@ -49,12 +47,14 @@ body.dark-mode .fleet-section {
     }
 
     .carousel-container {
-        height: 360px;
-        perspective: 900px;
+        height: 330px;
     }
 
     .carousel-item {
-        height: 320px;
+        width: 280px;
+        height: 280px;
+        margin-left: -140px;
+        margin-top: -140px;
     }
 
     .carousel-nav {
@@ -78,13 +78,13 @@ body.dark-mode .carousel-item {
 
 .carousel-item img {
     width: 100%;
-    height: 52%;
+    height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .carousel-item-info {
-    padding: 18px;
-    text-align: center;
+    display: none;
 }
 
 .carousel-item-class {

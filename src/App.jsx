@@ -4,34 +4,22 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const carouselItems = [
   {
-    image: '/images/WhatsApp%20Image%202026-05-12%20at%2014.00.24.jpeg',
+    image: '/images/WhatsApp%20Image%202026-05-12%20at%2014.00.46.jpeg',
     label: 'Normal Vehicles',
     title: 'Class 4',
+    price: 4,
+  },
+  {
+    image: '/images/WhatsApp%20Image%202026-05-12%20at%2014.00.47%20(2).jpeg',
+    label: 'Truck',
+    title: 'Class 2',
     price: 6,
   },
   {
-    image: '/images/WhatsApp%20Image%202026-05-12%20at%2014.00.27.jpeg',
-    label: 'Truck',
-    title: 'Class 2',
-    price: 8,
-  },
-  {
-    image: '/images/WhatsApp%20Image%202026-05-12%20at%2014.00.36.jpeg',
+    image: '/images/WhatsApp%20Image%202026-05-12%20at%2014.00.45%20(1).jpeg',
     label: 'Buses',
     title: 'Class 1',
     price: 12,
-  },
-  {
-    image: '/images/WhatsApp%20Image%202026-05-12%20at%2014.00.37.jpeg',
-    label: 'Normal Vehicles',
-    title: 'Class 4',
-    price: 6,
-  },
-  {
-    image: '/images/WhatsApp%20Image%202026-05-12%20at%2014.00.44.jpeg',
-    label: 'Normal Vehicles',
-    title: 'Class 4',
-    price: 6,
   },
 ];
 
@@ -55,34 +43,57 @@ const pricingPlans = [
   {
     title: 'Class 4 Package',
     description: 'Normal Vehicles',
-    amount: '60',
+    amount: '40',
     unit: '/10 lessons',
     features: [
-      '10 Practical lessons',
+      '1 Lesson - $4',
+      '10 Lessons - $40',
+      '20 Lessons - $80',
+      '30 Lessons - $120',
+      'Car hire - $40',
+      'Refresher - $6',
       'Modern sedan vehicles',
       'Experienced instructors',
-      'Flexible scheduling',
-      'Free car hire for test',
     ],
     buttonText: 'Enroll Now',
     buttonLink:
-      'https://wa.me/263772329050?text=Hi, I am interested in the Class 4 Package ($60 for 10 lessons)',
+      'https://wa.me/263772329050?text=Hi, I am interested in the Class 4 Package ($40 for 10 lessons)',
     style: 'featured',
   },
   {
     title: 'Class 2 Package',
     description: 'Truck License',
-    amount: '80',
+    amount: '60',
     unit: '/10 lessons',
     features: [
-      '10 Practical lessons',
-      'Heavy vehicle training',
-      'Load securing techniques',
-      'Defensive driving',
+      '1 Lesson - $6',
+      '10 Lessons - $60',
+      '20 Lessons - $120',
+      '30 Lessons - $180',
+      'Car hire - $50',
+      'Refresher - $8',
     ],
     buttonText: 'Get Started',
     buttonLink:
-      'https://wa.me/263772329050?text=Hi, I am interested in the Class 2 Package ($80 for 10 lessons)',
+      'https://wa.me/263772329050?text=Hi, I am interested in the Class 2 Truck Package ($60 for 10 lessons)',
+    style: 'standard',
+  },
+  {
+    title: 'Class 1 Package',
+    description: 'Bus License',
+    amount: '120',
+    unit: '/10 lessons',
+    features: [
+      '1 Lesson - $12',
+      '5 Lessons - $60',
+      '10 Lessons - $120',
+      '15 Lessons - $180',
+      'Bus hire - $60',
+      'Refresher - $15',
+    ],
+    buttonText: 'Get Started',
+    buttonLink:
+      'https://wa.me/263772329050?text=Hi, I am interested in the Class 1 Bus Package ($120 for 10 lessons)',
     style: 'standard',
   },
 ];
@@ -169,8 +180,8 @@ const testimonials = [
 ];
 
 const classOptions = {
-  '4': { label: 'Class 4 - Normal Vehicles', price: 6, short: 'Class 4' },
-  '2': { label: 'Class 2 - Truck', price: 8, short: 'Class 2' },
+  '4': { label: 'Class 4 - Normal Vehicles', price: 4, short: 'Class 4' },
+  '2': { label: 'Class 2 - Truck', price: 6, short: 'Class 2' },
   '1': { label: 'Class 1 - Buses', price: 12, short: 'Class 1' },
   oral: { label: 'Oral Provisional', price: 20, short: 'Oral Provisional' },
 };
@@ -372,11 +383,11 @@ function App() {
     if (offset > half) offset -= carouselItems.length;
     if (offset < -half) offset += carouselItems.length;
     const isCompact = viewportWidth <= 768;
-    const spacing = isCompact ? 82 : 120;
-    const depth = isCompact ? 240 : 400;
+    const spacing = isCompact ? 92 : 280;
+    const scale = offset === 0 ? 1 : isCompact ? 0.82 : 0.88;
     return {
-      transform: `translateX(${offset * spacing}px) translateZ(${depth}px) rotateY(${offset * angle}deg) scale(${offset === 0 ? 1 : 0.8})`,
-      opacity: offset === 0 ? 1 : 0.5,
+      transform: `translateX(${offset * spacing}px) scale(${scale})`,
+      opacity: 1,
       zIndex: offset === 0 ? 10 : 5 - Math.abs(offset),
     };
   };
@@ -591,8 +602,8 @@ function App() {
             <div className="calc-group">
               <label>License Class</label>
               <select value={calculator.classValue} onChange={handleCalcChange('classValue')}>
-                <option value="4">Class 4 - Normal Vehicles ($6/lesson)</option>
-                <option value="2">Class 2 - Truck ($8/lesson)</option>
+                <option value="4">Class 4 - Normal Vehicles ($4/lesson)</option>
+                <option value="2">Class 2 - Truck ($6/lesson)</option>
                 <option value="1">Class 1 - Buses ($12/lesson)</option>
                 <option value="oral">Oral Provisional ($20/week)</option>
               </select>
@@ -607,8 +618,8 @@ function App() {
               <label>Need Car Hire for Test?</label>
               <select value={calculator.hire} onChange={handleCalcChange('hire')}>
                 <option value="0">No</option>
-                <option value="50">Yes - Class 4 ($50)</option>
-                <option value="60">Yes - Class 2 ($60)</option>
+                <option value="40">Yes - Class 4 ($40)</option>
+                <option value="50">Yes - Class 2 ($50)</option>
                 <option value="60">Yes - Class 1 ($60)</option>
               </select>
             </div>
@@ -616,8 +627,8 @@ function App() {
               <label>Refresher Course?</label>
               <select value={calculator.refresher} onChange={handleCalcChange('refresher')}>
                 <option value="0">No</option>
-                <option value="8">Yes - Class 4 ($8)</option>
-                <option value="10">Yes - Class 2 ($10)</option>
+                <option value="6">Yes - Class 4 ($6)</option>
+                <option value="8">Yes - Class 2 ($8)</option>
                 <option value="15">Yes - Class 1 ($15)</option>
               </select>
             </div>

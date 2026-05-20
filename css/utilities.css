@@ -164,11 +164,6 @@ body.dark-mode .section-subtitle {
         grid-template-columns: 1fr;
     }
 
-    .carousel-item {
-        width: 270px;
-        margin-left: -135px;
-    }
-
     .calculator-container {
         padding: 30px 20px;
     }
@@ -181,12 +176,5 @@ body.dark-mode .section-subtitle {
     .contact-section {
         padding-top: 64px;
         padding-bottom: 64px;
-    }
-}
-
-@media (max-width: 340px) {
-    .carousel-item {
-        width: 240px;
-        margin-left: -120px;
     }
 }
