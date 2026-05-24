@@ -13,13 +13,13 @@ const carouselItems = [
     image: '/images/class-2-truck-carousel.jpg',
     label: 'Truck',
     title: 'Class 2',
-    price: 12,
+    price: 8,
   },
   {
     image: '/images/class-1-bus-carousel.jpg',
     label: 'Buses',
     title: 'Class 1',
-    price: 8,
+    price: 12,
   },
 ];
 
@@ -63,24 +63,6 @@ const pricingPlans = [
   {
     title: 'Class 2 Package',
     description: 'Truck License',
-    amount: '60',
-    unit: '/10 lessons',
-    features: [
-      '1 Lesson - $12',
-      '10 Lessons - $60',
-      '20 Lessons - $120',
-      '30 Lessons - $180',
-      'Car hire - $60',
-      'Refresher - $15',
-    ],
-    buttonText: 'Get Started',
-    buttonLink:
-      'https://wa.me/263772329050?text=Hi, I am interested in the Class 2 Truck Package ($60 for 10 lessons)',
-    style: 'standard',
-  },
-  {
-    title: 'Class 1 Package',
-    description: 'Bus License',
     amount: '80',
     unit: '/10 lessons',
     features: [
@@ -93,7 +75,25 @@ const pricingPlans = [
     ],
     buttonText: 'Get Started',
     buttonLink:
-      'https://wa.me/263772329050?text=Hi, I am interested in the Class 1 Bus Package ($80 for 10 lessons)',
+      'https://wa.me/263772329050?text=Hi, I am interested in the Class 2 Truck Package ($80 for 10 lessons)',
+    style: 'standard',
+  },
+  {
+    title: 'Class 1 Package',
+    description: 'Bus License',
+    amount: '120',
+    unit: '/10 lessons',
+    features: [
+      '1 Lesson - $12',
+      '10 Lessons - $120',
+      '20 Lessons - $240',
+      '30 Lessons - $360',
+      'Car hire - $60',
+      'Refresher - $15',
+    ],
+    buttonText: 'Get Started',
+    buttonLink:
+      'https://wa.me/263772329050?text=Hi, I am interested in the Class 1 Bus Package ($120 for 10 lessons)',
     style: 'standard',
   },
 ];
@@ -181,8 +181,8 @@ const testimonials = [
 
 const classOptions = {
   '4': { label: 'Class 4 - Normal Vehicles', price: 6, short: 'Class 4' },
-  '2': { label: 'Class 2 - Truck', price: 6, singleLessonPrice: 12, short: 'Class 2' },
-  '1': { label: 'Class 1 - Buses', price: 8, short: 'Class 1' },
+  '2': { label: 'Class 2 - Truck', price: 8, short: 'Class 2' },
+  '1': { label: 'Class 1 - Buses', price: 12, short: 'Class 1' },
   oral: { label: 'Oral Provisional', price: 20, short: 'Oral Provisional' },
 };
 
@@ -225,9 +225,7 @@ function App() {
     const computedTotal =
       calculator.classValue === 'oral'
         ? price * Math.ceil(calculator.lessons / 7) + calculator.hire + calculator.refresher
-        : calculator.classValue === '2' && calculator.lessons === 1
-          ? classOptions['2'].singleLessonPrice + calculator.hire + calculator.refresher
-          : price * calculator.lessons + calculator.hire + calculator.refresher;
+        : price * calculator.lessons + calculator.hire + calculator.refresher;
 
     const animated = { value: totalAmount };
     gsap.to(animated, {
@@ -605,8 +603,8 @@ function App() {
               <label>License Class</label>
               <select value={calculator.classValue} onChange={handleCalcChange('classValue')}>
                 <option value="4">Class 4 - Normal Vehicles ($6/lesson)</option>
-                <option value="2">Class 2 - Truck ($12 single, $60/10 lessons)</option>
-                <option value="1">Class 1 - Buses ($8/lesson)</option>
+                <option value="2">Class 2 - Truck ($8/lesson)</option>
+                <option value="1">Class 1 - Buses ($12/lesson)</option>
                 <option value="oral">Oral Provisional ($20/week)</option>
               </select>
             </div>
@@ -630,8 +628,8 @@ function App() {
               <select value={calculator.refresher} onChange={handleCalcChange('refresher')}>
                 <option value="0">No</option>
                 <option value="8">Yes - Class 4 ($8)</option>
-                <option value="15">Yes - Class 2 ($15)</option>
-                <option value="10">Yes - Class 1 ($10)</option>
+                <option value="10">Yes - Class 2 ($10)</option>
+                <option value="15">Yes - Class 1 ($15)</option>
               </select>
             </div>
           </div>
